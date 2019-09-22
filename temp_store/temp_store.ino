@@ -13,7 +13,7 @@ void setup() {
 void loop() {
 
   TempStore temp_store;
-
+P
   Serial.println("Storing Temperatures...");
   temp_store.store_temp(605, millis()); delay(10);
   temp_store.store_temp(612, millis()); delay(10);
@@ -31,4 +31,3 @@ void loop() {
   Serial.println("Done.");
   delay(5000);
 }
-

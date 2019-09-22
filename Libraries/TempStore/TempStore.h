@@ -8,7 +8,7 @@
  * Temperature "Storage" and "Transmit" Lib
  */
 typedef struct temp_store_elem {
-  long temp; // Expects a single decimal place of precision in farenheight  
+  float temp; // Expects a single decimal place of precision in farenheight  
   unsigned long time;
   temp_store_elem *next;
 } _temp_store_elem;
@@ -17,7 +17,7 @@ class TempStore {
   public:
     TempStore(void);
     ~TempStore(void);
-    bool store_temp (long new_temp, unsigned long new_time);
+    bool store_temp (float new_temp, unsigned long new_time);
     void to_csv(void);
     void dump_list(void);
     
@@ -26,7 +26,7 @@ class TempStore {
     unsigned long _num_elements;
     void _attach_ts_node(temp_store_elem *new_node);
     unsigned long long _get_csv_file_size(void);
-    char* _ts_elem_to_str(temp_store_elem *ts);
+    void _print_elem(temp_store_elem *ts);
     void _free_ll(void);
 };
 

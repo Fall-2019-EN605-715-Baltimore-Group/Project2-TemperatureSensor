@@ -12,7 +12,7 @@ void TempStore::_attach_ts_node(temp_store_elem *new_node) {
   if (_ll_head == NULL) {
     _ll_head = new_node;
     new_ts = _ll_head;
-    Serial.println("Inserted at head!");
+    // Serial.println("Inserted at head!");
   } else {
     // Traverse to the end of the list
     temp_store_elem *curr_node = _ll_head;
@@ -21,7 +21,7 @@ void TempStore::_attach_ts_node(temp_store_elem *new_node) {
     }
     curr_node->next = new_node;
     new_ts = curr_node;
-    Serial.println("Inserted at end of list!");
+    // Serial.println("Inserted at end of list!");
   }
   _num_elements++;
 }
@@ -30,15 +30,19 @@ unsigned long long TempStore::_get_csv_file_size(void) {
   return sizeof(ts_csv_elem_example) * _num_elements;
 }
 
-char* TempStore::_ts_elem_to_str(temp_store_elem *ts) {
-  char *ts_csv = (char*)malloc( sizeof(ts_csv_elem_example) );
+void TempStore::_print_elem(temp_store_elem *ts) {
+  //char *ts_csv = (char*)malloc( sizeof(ts_csv_elem_example) );
   unsigned long time_since_start = ts->time - _ll_head->time;
-  float f_temp = float(ts->temp) * 0.1f;
 
-  snprintf(ts_csv, sizeof(ts_csv_elem_example), "%010lu, % 02.01fF,\n", time_since_start, f_temp);
-  Serial.print(ts_csv);
+  // snprintf(ts_csv, sizeof(ts_csv_elem_example), "%010lu, % 02.01fF,\n", time_since_start, ts->temp);
+  // Serial.print(ts_csv);
 
-  return ts_csv;
+  Serial.print(time_since_start);
+  Serial.print(", ");
+  Serial.print(ts->temp);
+  Serial.println();
+
+  //return ts_csv;
 }
 
 void TempStore::_free_ll(void) {
@@ -63,7 +67,7 @@ TempStore::~TempStore(void) {
   dump_list();
 }
 
-bool TempStore::store_temp(long new_temp, unsigned long new_time) {
+bool TempStore::store_temp(float new_temp, unsigned long new_time) {
   // Create the new node
   temp_store_elem *new_ts = (temp_store_elem*)malloc(sizeof(temp_store_elem));
   if (new_ts == NULL) {
@@ -93,10 +97,8 @@ void TempStore::to_csv(void) {
   temp_store_elem *curr_node = _ll_head;
   while(curr_node != NULL) {
 
-    char *ts_ll_str_elem = _ts_elem_to_str(curr_node);
-    Serial.print( ts_ll_str_elem );
-    free(ts_ll_str_elem);
-
+    _print_elem(curr_node);
+    
     curr_node = curr_node->next;
   }
 }

@@ -18,7 +18,7 @@
         
 This library also requires that you use the full version of printf. To enable it do the following:
 
-1.  Enable the AVR printf versino selection
+1.  Enable the AVR printf version selection
     1. Open the File: `<Arduino Installation Directoy>/hardware/arduino/avr/platform.txt`
     2. Find the section of the board you are using (e.g. yun)
     3. Add the following lines, changing `yun` to your board name:
