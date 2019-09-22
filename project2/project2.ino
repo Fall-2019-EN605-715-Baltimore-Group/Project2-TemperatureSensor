@@ -44,7 +44,7 @@ void loop() {
     digitalWrite(LED0_PIN, HIGH);
     // Dump records
     temp_store.to_csv();
-    temp_store.dump_list();
+    // temp_store.dump_list();
     delay(500);
     digitalWrite(LED0_PIN, LOW);
     fISR0 = false;

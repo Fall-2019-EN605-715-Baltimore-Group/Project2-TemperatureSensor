@@ -34,15 +34,8 @@ void TempStore::_print_elem(temp_store_elem *ts) {
   //char *ts_csv = (char*)malloc( sizeof(ts_csv_elem_example) );
   unsigned long time_since_start = ts->time - _ll_head->time;
 
-  // snprintf(ts_csv, sizeof(ts_csv_elem_example), "%010lu, % 02.01fF,\n", time_since_start, ts->temp);
-  // Serial.print(ts_csv);
-
-  Serial.print(time_since_start);
-  Serial.print(", ");
-  Serial.print(ts->temp);
-  Serial.println();
-
-  //return ts_csv;
+  Serial.print(time_since_start); Serial.print(", ");
+  Serial.print(ts->temp); Serial.print(";\n");
 }
 
 void TempStore::_free_ll(void) {
@@ -96,11 +89,10 @@ void TempStore::to_csv(void) {
   // Print out one time,temperature pair at a time?
   temp_store_elem *curr_node = _ll_head;
   while(curr_node != NULL) {
-
     _print_elem(curr_node);
-    
     curr_node = curr_node->next;
   }
+  
 }
 
 void TempStore::dump_list(void) {
